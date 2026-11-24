@@ -55,3 +55,10 @@ A path that simply does not exist raises `ResolutionError`, not
 link, while a missing path is just missing. If you catch `ResolutionError` you
 cover both; catch `DanglingSymlinkError` only when you specifically care about
 broken links.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
